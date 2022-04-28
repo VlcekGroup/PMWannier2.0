@@ -1,0 +1,16 @@
+FC	    = gfortran
+MPIFLG  = -O3 -fcheck=all
+
+# compile
+all: auxfl andft cleanx
+
+andft: 
+	$(FC) -o wannier.x get_time.o header.o variable.o read.o write_read_info.o mat_alloc.o mat_prep.o frag_wan.o CO_prep.o CO_prep_det.o CO_prep_sto.o sdp_full.o sdp_lw.o sdp_lw_sw.o sdp_fw.o sdp_fw_sw.o write_wf.o r8lib.o matrix_exponential.o wannier_core.o main.f90 -fopenmp
+auxfl:
+	$(FC) -c variable.f90 get_time.f90 header.f90 read.f90 write_read_info.f90 mat_alloc.f90 mat_prep.f90 frag_wan.f90 CO_prep.f90 CO_prep_det.f90 CO_prep_sto.f90 sdp_full.f90 sdp_lw.f90 sdp_lw_sw.f90 sdp_fw.f90 sdp_fw_sw.f90  write_wf.f90 r8lib.f90 matrix_exponential.f90 wannier_core.f90  -fopenmp
+
+clean:
+	rm -rf *o *mod wannier.x
+
+cleanx:
+	rm -rf *o *mod  
