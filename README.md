@@ -33,31 +33,31 @@ In the source code folder "src", simply hit "make" to install the program wannie
 ### Input Specification
 #### Basic Parameters
 restart\
-(Logical. This controls whether your job starts from canonical orbitals (f) or restarts from transformed orbitals (t). Default: f)\
+(Logical. This controls whether your job starts from canonical orbitals (f) or restarts from transformed orbitals (t). Default: f)
 
 max_iter\
-(Integer. This specifies the maximum iteration steps in the steepest ascent process (inner-loop). Default: 500)\
+(Integer. This specifies the maximum iteration steps in the steepest ascent process (inner-loop). Default: 500)
 
 delta_t\
-(Real. This specifies the initial step of the step ascent process. Default: 5.0)\
+(Real. This specifies the initial step of the step ascent process. Default: 5.0)
 
 delta_t_correction\
-(Real. This specifies the correction factor for delta_t if the change of the objective function is negative. The delta_t is corrected by taking the new delta_t = delta_t / delta_t_correction. Default: 1.1)\
+(Real. This specifies the correction factor for delta_t if the change of the objective function is negative. The delta_t is corrected by taking the new delta_t = delta_t / delta_t_correction. Default: 1.1)
 
 num_of_threads\
-(Integer. This specifies the number of threads for Openmp processes. Default: 1)\
+(Integer. This specifies the number of threads for Openmp processes. Default: 1)
 
 convergence_threshold_inner\
-(Real. This specifies the convergence threshold for the steepest ascent process (the inner-loop). Default: 1E-7)\
+(Real. This specifies the convergence threshold for the steepest ascent process (the inner-loop). Default: 1E-7)
 
 nhit_convergence_inner\
-(Integer. This specifies the number of times of consecutively hitting the convergence criterion in the inner-loop before exiting. Requirement of multiple hittings guarantees a smooth convergence behavior. Default: 3)\
+(Integer. This specifies the number of times of consecutively hitting the convergence criterion in the inner-loop before exiting. Requirement of multiple hittings guarantees a smooth convergence behavior. Default: 3)
 
 atom_space\
-(Character. This specifies whether the localization is performed on all atoms, selected atoms, or a giant "atom". There are three options: full, local, and fragment, where full means all atoms, local means selected atoms, and fragment means giant "atom". Default: full)\
+(Character. This specifies whether the localization is performed on all atoms, selected atoms, or a giant "atom". There are three options: full, local, and fragment, where full means all atoms, local means selected atoms, and fragment means giant "atom". Default: full)
 
 step_prnt_info\
-(Integer. This specifies the interval to print the output information during the steepest ascent process. Default: 50)\
+(Integer. This specifies the interval to print the output information during the steepest ascent process. Default: 50)
 
 space\
 (Character. This specifies in which space the localization if performed. There are three options: occ, unocc, and random. Randoms means one can define the space by just providing the orbitals, either occupied or unoccupied. Default: occ\
@@ -103,43 +103,42 @@ step_prnt_tmp\
 
 #### If you choose "sequential" in "exhaust_space", specify the following parameters.
 nstates_seqwan\
-(Integer. This specifies the number of states in the full space that is being sequentially exhausted. The code reads these states from the 1st states to the specified states in the bin file. Default: -1)\
+(Integer. This specifies the number of states in the full space that is being sequentially exhausted. The code reads these states from the 1st states to the specified states in the bin file. Default: -1)
 
 nstates_core\
-(Integer. This specifies the size of the core space. It should be greater than or equal to the number of regionally localized states. Default: -1)\
+(Integer. This specifies the size of the core space. It should be greater than or equal to the number of regionally localized states. Default: -1)
 
 nstates_r\
-(Integer. This specifies the step of exhausting the rest space. Default: 1)\
+(Integer. This specifies the step of exhausting the rest space. Default: 1)
 
 istep_0\
-(Integer: This specifies the initial step in the outer-loop. For restart, specify it from where the previous job ends. Default: 1)\
+(Integer: This specifies the initial step in the outer-loop. For restart, specify it from where the previous job ends. Default: 1)
 
 total_step\
 5000\
-(Integer. This specifies the maximum iteration steps in the outer-loop. Default: 1000)\
+(Integer. This specifies the maximum iteration steps in the outer-loop. Default: 1000)
 
 reorder_rest\
-(Logical. This specifies whether to do reordering of the rest space or not when one complete accessing is done. Default: t)\
+(Logical. This specifies whether to do reordering of the rest space or not when one complete accessing is done. Default: t)
 
 #### If you choose "sequential" in "exhaust_space", specify the following parameters.
 nstates_stowan\
-(Integer. This specifies the number of states in the full space that is being sequentially exhausted. The code reads these states from the 1st states to the specified states in the bin file. Default: -1)\
+(Integer. This specifies the number of states in the full space that is being sequentially exhausted. The code reads these states from the 1st states to the specified states in the bin file. Default: -1)
 
 nstates_det\
-(Integer. This specifies the size of the deterministic space. It should be greater than or equal to the number of regionally localized states. Default: -1)\
+(Integer. This specifies the size of the deterministic space. It should be greater than or equal to the number of regionally localized states. Default: -1)
 
 nstates_sto\
-(Integer. This specifies the number of stochastic states that sample the rest space. Default: 1)\
+(Integer. This specifies the number of stochastic states that sample the rest space. Default: 1)
 
 i_mc_step0\
-1\
-(Integer: This specifies the initial step in the outer-loop. For restart, specify it from where the previous job ends. Default: 1)\
+(Integer: This specifies the initial step in the outer-loop. For restart, specify it from where the previous job ends. Default: 1)
 
 mc_step\
-(Integer. This specifies the maximum iteration steps in the outer-loop. Default: 1000)\
+(Integer. This specifies the maximum iteration steps in the outer-loop. Default: 1000)
 
 nhit_cong_outer\
-(Integer. This specifies the number of times of consecutively hitting the convergence criterion in the outer-loop before exiting. Default: 5)\
+(Integer. This specifies the number of times of consecutively hitting the convergence criterion in the outer-loop before exiting. Default: 5)
 
 ## Typical Input Examples for wannier.x
 ### One benzene molecule
