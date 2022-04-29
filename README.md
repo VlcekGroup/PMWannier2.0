@@ -51,7 +51,7 @@ convergence_threshold_inner\
 (Real. This specifies the convergence threshold for the steepest ascent process (the inner-loop). Default: 1E-7)\
 
 nhit_convergence_inner\
-(Integer. This specifies the number of times consecutively hitting the convergence criterion in the inner-loop before exiting. Requirement of multiple hittings guarantees a smooth convergence behavior. Default: 3)\
+(Integer. This specifies the number of times of consecutively hitting the convergence criterion in the inner-loop before exiting. Requirement of multiple hittings guarantees a smooth convergence behavior. Default: 3)\
 
 atom_space\
 (Character. This specifies whether the localization is performed on all atoms, selected atoms, or a giant "atom". There are three options: full, local, and fragment, where full means all atoms, local means selected atoms, and fragment means giant "atom". Default: full)\
@@ -91,6 +91,122 @@ space_size\
 
 #### If you choose "sub" in "space_size", specify the following parameters.
 define_subspace\
+(1st line: Character. This specifies how to determine the size of the subspace. There are three options: loc_cut, nstates, energy. Default: loc_cut)\
+(2nd line: Depends on the 1st line. If "loc_cut" is choose, provide a "Real" number (Default: 1E-3) to specify the locality cutoff when selecting the states. If "nstates" is chosen, provide an "Integer" number (No default value) to specify the number of states to take based on the locality order. If "energy"  is chosen, provide a "Real" number (No default value) to specify the energy window for the unoccpied states only.)
+
+#### If you choose "sequential" or "stochastic" in "exhaust_space", specify the following parameters.
+convergence_threshold_outer\
+(Real. This specifies the convergence criterion for the outer-loop. Default: 5E-7)\
+
+step_prnt_tmp\
+(Integer. This specifies the interval to output the temporary transformed bin file for restart. Default: 100)\
+
+#### If you choose "sequential" in "exhaust_space", specify the following parameters.
+nstates_seqwan\
+(Integer. This specifies the number of states in the full space that is being sequentially exhausted. The code reads these states from the 1st states to the specified states in the bin file. Default: -1)\
+
+nstates_core\
+(Integer. This specifies the size of the core space. It should be greater than or equal to the number of regionally localized states. Default: -1)\
+
+nstates_r\
+(Integer. This specifies the step of exhausting the rest space. Default: 1)\
+
+istep_0\
+(Integer: This specifies the initial step in the outer-loop. For restart, specify it from where the previous job ends. Default: 1)\
+
+total_step\
+5000\
+(Integer. This specifies the maximum iteration steps in the outer-loop. Default: 1000)\
+
+reorder_rest\
+(Logical. This specifies whether to do reordering of the rest space or not when one complete accessing is done. Default: t)\
+
+#### If you choose "sequential" in "exhaust_space", specify the following parameters.
+nstates_stowan\
+(Integer. This specifies the number of states in the full space that is being sequentially exhausted. The code reads these states from the 1st states to the specified states in the bin file. Default: -1)\
+
+nstates_det\
+(Integer. This specifies the size of the deterministic space. It should be greater than or equal to the number of regionally localized states. Default: -1)\
+
+nstates_sto\
+(Integer. This specifies the number of stochastic states that sample the rest space. Default: 1)\
+
+i_mc_step0\
+1\
+(Integer: This specifies the initial step in the outer-loop. For restart, specify it from where the previous job ends. Default: 1)\
+
+mc_step\
+(Integer. This specifies the maximum iteration steps in the outer-loop. Default: 1000)\
+
+nhit_cong_outer\
+(Integer. This specifies the number of times of consecutively hitting the convergence criterion in the outer-loop before exiting. Default: 5)\
+
+## Typical Input Examples for wannier.x
+### One benzene molecule
+restart\
+f\
+
+max_iter\
+500\
+
+delta_t\
+5.0\
+
+delta_t_correction\
+1.1\
+
+num_of_threads\
+10\
+
+convergence_threshold_inner\
+1E-7\
+
+nhit_convergence_inner\
+3\
+
+atom_space\
+full\
+
+step_prnt_info\
+50\
+
+space\
+occ
+
+### Nine benezene molecules
+restart\
+f\
+max_iter\
+2000\
+delta_t\
+5.0\
+delta_t_correction\
+1.1\
+num_of_threads\
+10\
+convergence_threshold_inner\
+1E-7\
+nhit_convergence_inner\
+3\
+atom_space\
+local\
+local_wannierization\
+15\
+12\
+48 35 9 22 61 73 27 40 1 14 54 66\
+fragment_wannierization\
+1\
+step_findwf\
+100\
+step_prnt_info\
+100\
+exhaust_space\
+sequential\
+space\
+occ\
+space_size\
+full\
+define_subspace\
 loc_cut\
 1E-3\
 convergence_threshold_outer\
@@ -98,11 +214,11 @@ convergence_threshold_outer\
 step_prnt_tmp\
 1000\
 nstates_seqwan\
--1\
+135\
 nstates_core\
--1\
+15\
 nstates_r\
-1\
+30\
 istep_0\
 1\
 total_step\
@@ -120,60 +236,6 @@ i_mc_step0\
 mc_step\
 10000\
 nhit_cong_outer\
-5\
-
-
-#### Subspace Wannerization
-subspace_wannierzation\
-(Logical. This is to perform wannierzation using an occupied subspace of KS states. Default: F)\
-\
-subspace_factor\
-(Integer. This is to define the size of the occupied subspace. Suppose you are looking for N wannier functions localized on your specified atoms, then the size of the subspace will be N*sub_fac. Default: 3)\
-\
-subspace_threshold\
-(Real. This defines when to start the subspace wannierzation. When the gain in the objective function is greater than this value, the subspace wannierzation will be triggered. Otherwise it will keep running using the full occupied space. Default: 1d0)\
-\
-restart_old\
-(Logical. This is to connect the full space wannierization and the subspace wannierzation. Default: F. If this is true, it will read the wannier.bin file and continue with subspace wannierzation. Note that “restart” has to be true as well if this one is true.)\
-\
-specific_state\
-(Logical. This is to perform wannierization using the KS states as specified in the following lines only. Default: F. If this is true, then in the next line provide the number of states used in the wannierzation and then followed by the state indices in one line.)
-
-
-## Typical Input Examples for wannier.x
-### One benzene molecule
-restart\
-f\
-max_iter\
-200\
-delta_t\
-4.0\
-delta_t_correction\
-1.1\
-num_of_threads\
-50\
-convergence_threshold\
-1E-8
-### Nine benezene molecules
-restart\
-f\
-max_iter\
-200\
-delta_t\
-4.0\
-delta_t_correction\
-1.1\
-num_of_threads\
-50\
-convergence_threshold\
-1E-8\
-local_wannierization\
-t\
-12 (# of atoms of one benzene molecule)\
-15 (# of valence electrons of one benzene molecule/2 )\
-48 35 9 22 61 73 27 40 1 14 54 66 (the atom labels of the 12 atoms)\
-step_findwf\
-20 (it will print the orbital indices of the 15 wannier functions every 20 effective iterations)
-
+5
 
 
