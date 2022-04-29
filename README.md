@@ -145,31 +145,22 @@ nhit_cong_outer\
 ### One benzene molecule
 restart\
 f\
-
 max_iter\
 500\
-
 delta_t\
 5.0\
-
 delta_t_correction\
 1.1\
-
 num_of_threads\
 10\
-
 convergence_threshold_inner\
 1E-7\
-
 nhit_convergence_inner\
 3\
-
 atom_space\
 full\
-
 step_prnt_info\
 50\
-
 space\
 occ
 
