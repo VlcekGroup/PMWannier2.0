@@ -195,6 +195,10 @@ subroutine read_input
               stop "error: unrecognized def_sub variable"
            end if
         case('local_wannierization')
+          if(.not.loc_wan) then
+            write(6,*) "Please specify the atom space as local before this block or remove this block from your input!"
+            stop
+          end if
           read(111,*,iostat=inpstat) ns_lw
           if(inpstat/=0) stop "ns_lw value missing in input"
           read(111,*,iostat=inpstat) noa_lw
