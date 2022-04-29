@@ -71,6 +71,10 @@ If you choose "random", in the next three lines provid the following information
 #### If you specify the atom_space as "full", no further parameter is needed. You are done here.
 
 ### Selected-atom localization
+#### If you specify the atom_space as "local" or "fragment", specify the following parameter.
+step_findwf\
+(Integer. This specifies the interval to print the locality of the found wannier functions during the steep ascent process. Default: 50)
+
 #### If you specify the atom_space as "local", specify the following parameters.
 local_wannierization\
 (1st line: Integer. This specifies the number of regionally localized states on the selected atoms. Default: -1)\
