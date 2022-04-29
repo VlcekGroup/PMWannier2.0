@@ -85,6 +85,14 @@ local_wannierization\
 fragment_wannierization\
 (Integer. This specifies the number of fragments for the localization. Note that sequential localization applies to one fragment only in the current version. Default: 1)
 
+#### If you specify the atom_space as "fragment", providing another file call "group_atom" with the following information.
+#### This is a description line, must be here!
+provide ns, na, atom list\
+(1st line: Integer. This specifies the number of regionally localized states on the selected atoms. Default: -1)\
+(2nd line: Integer. This specifies the number of selected atoms. Default: 1)\
+(3rd line: Integer. This specifies the atom list in the cnt.ini file. No default value)\
+#### If you have more than one fragment, in the next three lines, provide the ns, na, and atom list for the second fragment and so on. 
+
 #### You can choose different ways to transform the orbitals on the selected atoms by specifying "exhaust_space".
 exhaust_space\
 (Character. This specifies how the orbital space is transformed. There are three options: simple, sequential, and stochastic. Default: simple)
@@ -231,5 +239,14 @@ mc_step\
 10000\
 nhit_cong_outer\
 5
+
+### group_atom file for two fragments
+provide ns, na, atom list\
+15\
+12\
+1 2 3 4 5 6 7 8 9 10 11 12\
+18\
+13\
+13 14 15 16 17 18 19 20 21 22 23 24 25
 
 
