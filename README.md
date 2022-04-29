@@ -75,7 +75,7 @@ If you choose "random", in the next three lines provid the following information
 local_wannierization\
 (1st line: Integer. This specifies the number of regionally localized states on the selected atoms. Default: -1)\
 (2nd line: Integer. This specifies the number of selected atoms. Default: 1)\
-(3rd line: Integer. This specifies the atom list in the cnt.ini file. No default value)\
+(3rd line: Integer. This specifies the atom list in the cnt.ini file. No default value)
 
 #### If you specify the atom_space as "fragment", specify the following parameter.
 fragment_wannierization\
@@ -96,10 +96,10 @@ define_subspace\
 
 #### If you choose "sequential" or "stochastic" in "exhaust_space", specify the following parameters.
 convergence_threshold_outer\
-(Real. This specifies the convergence criterion for the outer-loop. Default: 5E-7)\
+(Real. This specifies the convergence criterion for the outer-loop. Default: 5E-7)
 
 step_prnt_tmp\
-(Integer. This specifies the interval to output the temporary transformed bin file for restart. Default: 100)\
+(Integer. This specifies the interval to output the temporary transformed bin file for restart. Default: 100)
 
 #### If you choose "sequential" in "exhaust_space", specify the following parameters.
 nstates_seqwan\
