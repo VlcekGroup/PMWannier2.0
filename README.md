@@ -6,7 +6,9 @@ This code performs localization on canonical orbitals employing the Pipek-Mezey 
 \
 The theoretical fundaments of local, fragment, and sequential wannierization can be found in (1) G. Weng, V. Vlcek  J. Chem. Phys. 155, 054104 (2021); https://doi.org/10.1063/5.0058410, and (2) G. Weng, V. Vlcek, et al., arXiv:2204.00252; https://doi.org/10.48550/arXiv.2204.00252. This program is mostly written by the authors, but it has two publicly available subroutines, primarily including the calculation of the exponential of a matrix provided by Cleve Moler and Charles Van Loan (SIAM Review, Volume 45, Number 1, March 2003, pages 3-49.), and the Gamma function provided by John Burkardt (Handbook of Mathematical Functions, National Bureau of Standards, 1964 and The Mathematica Book, Fourth Edition, Cambridge University Press, 1999)
 
-The PMWannier1.0 work was supported by the NSF CAREER award through Grant No. DMR-1945098. The PMWannier2.0 covers all the functions in the old version. And this work was supported by the Office of Science of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231 using NERSC award BES-ERCAP0020089.
+The PMWannier1.0 work was supported by the NSF CAREER award through Grant No. DMR-1945098. 
+
+PMWannier2.0, covers all the functions in the old version and the updates detailed in publication #2. This work was supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, Scientific Discovery through Advanced Computing (SciDAC) program under Award Number DE-SC0022198.
 
 ## Installation
 In the source code folder "src", simply hit "make" to install the program wannier.x, where the openmpi library is needed.
