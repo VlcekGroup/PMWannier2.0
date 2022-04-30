@@ -1,5 +1,5 @@
 # PMWannier2.0
-The second version (V2.0) of Pipek Mezey wannier codes with local, fragment, and sequential wannierization routines for large systems where molecules are place in an environment.
+The second version (V2.0) of Pipek Mezey wannier codes with local, fragment, and sequential wannierization routines for large systems.
 
 # Manual for PMwannier package
 This code performs localization on canonical orbitals employing the Pipek-Mezey localization scheme. The objective functional is maximized using the steepest ascent algorithm. It is primarily designed for the localization of occupied states but also available for virtual states if a specific virtual space is defined. The main feature of this code is to efficiently obtain a set of regionally localized states on the atoms (molecules) of interest in a large system (usually with over 4000 electrons). The PM functional is modified to evaluate the selected atoms only. The orbital space can be either transformed all at once or sequentially exhausted even if there is no knowledge of the single-particle states a priori.\
