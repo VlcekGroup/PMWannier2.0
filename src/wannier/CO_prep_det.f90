@@ -1,17 +1,3 @@
-!                     
-!                     
-!    The routine(s) in this file are a part of the  
-!                     PMWannier2.0                 
-!    suite, developed 2020-2022, and copyrighted    
-!    to the authors: Guorong Weng and Vojtech Vlcek,
-!    at the University of California, Santa Barbara.
-!                                                   
-!                                                   
-!   If you use or modify any part of this routine   
-!   the header should be kept and unmodified.          
-!                                                   
-!                                                   
-!  
 subroutine make_CO_det(i_step)
       use OMP_LIB
       use commvar
@@ -60,7 +46,11 @@ subroutine make_CO_det(i_step)
       end if
 
       if(i_step.gt.nblock) then
-        i_blk = mod(i_step,nblock)
+        if(mod(i_step,nblock).lt.1) then
+          i_blk = nblock
+        else
+          i_blk = mod(i_step,nblock)
+        end if
       else
         i_blk = i_step
       end if
@@ -145,7 +135,7 @@ subroutine get_core_rest(i_step_gdr)
        if(loc_wan) then
          na = noa_lw
        elseif(frag_wan) then
-         na = 1
+         na = n_frag
        end if
 
        allocate(label(na),stat=st)
@@ -170,7 +160,9 @@ subroutine get_core_rest(i_step_gdr)
          !$OMP parallel
          !$OMP do schedule(dynamic)
          do j=1, ns_sub
-            Q_diag(1,j) = sum(AO(:,j)*FWF(:,1)*AO(:,j))*dV
+           do i=1, na
+             Q_diag(i,j) = sum(AO(:,j)*FWF(:,i)*AO(:,j))*dV
+           end do
          end do
          !$OMP end do
          !$OMP end parallel
@@ -231,7 +223,11 @@ subroutine update_core_rest(i_step_up)
      real*8, allocatable :: Q_diag(:,:), rest_rod(:,:), locality(:)
 
      if(i_step_up.gt.nblock) then
-       i_blk = mod(i_step_up,nblock)
+       if(mod(i_step_up,nblock).lt.1) then
+         i_blk = nblock
+       else
+         i_blk = mod(i_step_up,nblock)
+       end if
      else
        i_blk = i_step_up
      end if
@@ -262,12 +258,12 @@ subroutine update_core_rest(i_step_up)
          write(6,*) "Reordering rest_st for the next round!"; call flush(6)
          
          if(frag_wan) then
-           na = 1 
+           na = n_frag 
          elseif(loc_wan) then
            na = noa_lw
          end if
 
-         allocate(Q_diag(na,n_rest),stat=st)
+         allocate(Q_diag(n_frag,n_rest),stat=st)
          if(st/=0) stop "error: allocation of Q_diag matrix"
          allocate(rest_rod(nx*ny*nz,n_rest),stat=st)
          if(st/=0) stop "error: allocation of rest_rod matrix"
@@ -278,7 +274,9 @@ subroutine update_core_rest(i_step_up)
            !$OMP parallel
            !$OMP do schedule(dynamic)
            do j=1, n_rest
-              Q_diag(1,j) = sum(rest_st(:,j)*FWF(:,1)*rest_st(:,j))*dV
+             do i=1, n_frag
+               Q_diag(i,j) = sum(rest_st(:,j)*FWF(:,i)*rest_st(:,j))*dV
+             end do
            end do
            !$OMP end do
            !$OMP end parallel
@@ -296,7 +294,7 @@ subroutine update_core_rest(i_step_up)
 
          write(6,*) "done with Q_diag"; call flush(6)
 
-         if(loc_wan) then
+         !if(loc_wan) then
            !$OMP parallel
            !$OMP do schedule(dynamic)
              do i=1, n_rest
@@ -304,9 +302,9 @@ subroutine update_core_rest(i_step_up)
              end do
            !$OMP end do
            !$OMP end parallel
-         elseif(frag_wan) then
-           locality(:) = Q_diag(1,:)
-         end if
+         !elseif(frag_wan) then
+           !locality(:) = Q_diag(1,:)
+         !end if
 
          do i=1, n_rest
            orb_indx_dr = maxloc(locality,1)
